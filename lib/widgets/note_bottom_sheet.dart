@@ -23,19 +23,18 @@ class _NoteBottomSheetState extends State<NoteBottomSheet> {
         autovalidateMode: noteValidate,
         key: noteKey,
         child: Column(
+          spacing: 30,
           children: [
             TitleTextField(
               onSaved: (value) {
                 title = value;
               },
             ),
-            const SizedBox(height: 30),
             NoteTextField(
               onSaved: (value) {
                 note = value;
               },
             ),
-            const SizedBox(height: 30),
             AddNoteButton(
               onPressed: () {
                 if (noteKey.currentState!.validate()) {
