@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/widgets/buttons/edit_note_button.dart';
-import 'package:notes_app/widgets/note_text_field.dart';
-import 'package:notes_app/widgets/title_text_field.dart';
 
 class EditNoteView extends StatelessWidget {
   const EditNoteView({super.key});
@@ -24,9 +22,9 @@ class EditNoteView extends StatelessWidget {
                   ],
                 ),
               ),
-              TitleTextField(),
-              SizedBox(height: 20),
-              NoteTextField(),
+              // TitleTextField(),
+              // SizedBox(height: 20),
+              // NoteTextField(),
             ],
           ),
         ),

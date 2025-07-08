@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:notes_app/constants/constants.dart';
 
 class AddNoteButton extends StatelessWidget {
-  const AddNoteButton({super.key});
+  final void Function()? onPressed;
+  const AddNoteButton({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +15,9 @@ class AddNoteButton extends StatelessWidget {
           borderRadius: BorderRadiusGeometry.circular(12),
         ),
       ),
-      onPressed: () {},
+      onPressed: onPressed,
       child: const Text(
-        'Add',
+        'Add Note',
         style: TextStyle(
           fontSize: 26,
           fontWeight: FontWeight.bold,
