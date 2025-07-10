@@ -3,7 +3,12 @@ import 'package:notes_app/constants/constants.dart';
 
 class AddNoteButton extends StatelessWidget {
   final void Function()? onPressed;
-  const AddNoteButton({super.key, required this.onPressed});
+  final bool isLoading;
+  const AddNoteButton({
+    super.key,
+    required this.onPressed,
+    this.isLoading = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +21,20 @@ class AddNoteButton extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
-      child: const Text(
-        'Add Note',
-        style: TextStyle(
-          fontSize: 26,
-          fontWeight: FontWeight.bold,
-          color: Colors.black,
-        ),
-      ),
+      child: isLoading
+          ? const SizedBox(
+              width: 26,
+              height: 26,
+              child: CircularProgressIndicator(color: Colors.amberAccent),
+            )
+          : const Text(
+              'Add Note',
+              style: TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
     );
   }
 }

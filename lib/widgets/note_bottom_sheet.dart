@@ -41,43 +41,48 @@ class _NoteBottomSheetState extends State<NoteBottomSheet> {
           }
         },
         builder: (context, state) {
-          if (state is AddNoteLoading) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 45, horizontal: 15),
-            child: Form(
-              autovalidateMode: noteValidate,
-              key: noteKey,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                spacing: 30,
-                children: [
-                  TitleTextField(
-                    onSaved: (value) {
-                      title = value!;
-                    },
-                  ),
-                  NoteTextField(
-                    onSaved: (value) {
-                      note = value!;
-                    },
-                  ),
-                  AddNoteButton(
-                    onPressed: () {
-                      if (noteKey.currentState!.validate()) {
-                        noteKey.currentState!.save();
-                        context.read<AddNoteCubit>().addNote(
-                          NoteModel(noteTitle: title, note: note, color: 5),
+          return AbsorbPointer(
+            absorbing: state is AddNoteLoading,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 35, horizontal: 15),
+              child: Form(
+                autovalidateMode: noteValidate,
+                key: noteKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: 30,
+                  children: [
+                    TitleTextField(
+                      onSaved: (value) {
+                        title = value!;
+                      },
+                    ),
+                    NoteTextField(
+                      onSaved: (value) {
+                        note = value!;
+                      },
+                    ),
+                    BlocBuilder<AddNoteCubit, AddNoteState>(
+                      builder: (context, state) {
+                        return AddNoteButton(
+                          isLoading: state is AddNoteLoading,
+                          onPressed: () {
+                            if (noteKey.currentState!.validate()) {
+                              noteKey.currentState!.save();
+                              context.read<AddNoteCubit>().addNote(
+                                NoteModel(noteTitle: title, note: note, color: 5),
+                              );
+                            } else {
+                              setState(() {
+                                noteValidate = AutovalidateMode.always;
+                              });
+                            }
+                          },
                         );
-                      } else {
-                        setState(() {
-                          noteValidate = AutovalidateMode.always;
-                        });
-                      }
-                    },
-                  ),
-                ],
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           );
