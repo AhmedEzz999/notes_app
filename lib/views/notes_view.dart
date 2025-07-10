@@ -11,7 +11,7 @@ class NotesView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.only(top: 5, left: 15, right: 15),
+          padding: const EdgeInsets.only(top: 10, left: 12, right: 12),
           child: Column(
             children: [
               const CustomAppBar(),

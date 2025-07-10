@@ -17,7 +17,10 @@ class EditNoteView extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Edit Note', style: TextStyle(fontSize: 30)),
+                    Text(
+                      'Edit Note',
+                      style: TextStyle(fontSize: 30, color: Colors.white),
+                    ),
                     EditNoteButton(),
                   ],
                 ),

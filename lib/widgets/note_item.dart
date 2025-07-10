@@ -8,9 +8,9 @@ class NoteItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 24),
+      padding: const EdgeInsets.only(bottom: 26, top: 10),
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 16),
         decoration: BoxDecoration(
           color: Colors.amberAccent,
           borderRadius: BorderRadius.circular(18),
@@ -28,7 +28,7 @@ class NoteItem extends StatelessWidget {
                 ),
               ),
               subtitle: Padding(
-                padding: const EdgeInsets.only(top: 10, bottom: 6),
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -57,11 +57,11 @@ class NoteItem extends StatelessWidget {
               children: [
                 Text(
                   '8:32',
-                  style: TextStyle(fontSize: 22, color: Colors.grey),
+                  style: TextStyle(fontSize: 24, color: Colors.grey),
                 ),
                 Text(
                   '25/05/2025',
-                  style: TextStyle(fontSize: 22, color: Colors.grey),
+                  style: TextStyle(fontSize: 24, color: Colors.grey),
                 ),
               ],
             ),
