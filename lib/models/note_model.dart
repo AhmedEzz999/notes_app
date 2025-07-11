@@ -5,17 +5,21 @@ part 'note_model.g.dart';
 @HiveType(typeId: 0)
 class NoteModel extends HiveObject {
   @HiveField(0)
-  final String noteTitle;
+  String noteTitle;
   @HiveField(1)
-  final String note;
+  String note;
   @HiveField(2)
-  final String dateCreatedAt =
-      '${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}';
+  String dateCreatedAt;
   @HiveField(3)
-  final String timeCreatedAt =
-      '${DateTime.now().hour}:${DateTime.now().minute}';
+  String timeCreatedAt;
   @HiveField(4)
   final int color;
 
-  NoteModel({required this.noteTitle, required this.note, required this.color});
+  NoteModel({
+    required this.noteTitle,
+    required this.note,
+    required this.dateCreatedAt,
+    required this.timeCreatedAt,
+    required this.color,
+  });
 }

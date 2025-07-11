@@ -78,6 +78,10 @@ class _NoteBottomSheetState extends State<NoteBottomSheet> {
                                 final NoteModel note = NoteModel(
                                   noteTitle: title,
                                   note: noteText,
+                                  dateCreatedAt:
+                                      '${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}',
+                                  timeCreatedAt:
+                                      '${DateTime.now().hour}:${DateTime.now().minute}',
                                   color: 5,
                                 );
                                 context.read<AddNoteCubit>().addNote(note);

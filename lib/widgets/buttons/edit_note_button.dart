@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 class EditNoteButton extends StatelessWidget {
-  const EditNoteButton({super.key});
+  final void Function()? onPressed;
+  const EditNoteButton({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
-      onPressed: () {},
+      onPressed: onPressed,
       icon: Container(
         padding: const EdgeInsets.all(5),
         decoration: BoxDecoration(
