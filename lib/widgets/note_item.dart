@@ -22,12 +22,24 @@ class NoteItem extends StatelessWidget {
           children: [
             ListTile(
               contentPadding: const EdgeInsets.all(0),
-              title: Text(
-                note.noteTitle,
-                style: const TextStyle(
-                  fontSize: 28,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
+              title: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return EditNoteView(note: note);
+                      },
+                    ),
+                  );
+                },
+                child: Text(
+                  note.noteTitle,
+                  style: const TextStyle(
+                    fontSize: 28,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               subtitle: Padding(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes_app/constants/functions.dart';
 import 'package:notes_app/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/widgets/buttons/add_note_button.dart';
@@ -80,8 +81,9 @@ class _NoteBottomSheetState extends State<NoteBottomSheet> {
                                   note: noteText,
                                   dateCreatedAt:
                                       '${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}',
-                                  timeCreatedAt:
-                                      '${DateTime.now().hour}:${DateTime.now().minute}',
+                                  timeCreatedAt: formatTimeTo12Hour(
+                                    dateTime: DateTime.now(),
+                                  ),
                                   color: 5,
                                 );
                                 context.read<AddNoteCubit>().addNote(note);

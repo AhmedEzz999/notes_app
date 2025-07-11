@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/constants/functions.dart';
 import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/widgets/buttons/edit_note_button.dart';
 import 'package:notes_app/widgets/edit_note_text_field.dart';
@@ -39,8 +40,9 @@ class _EditNoteViewState extends State<EditNoteView> {
                             _editNoteKey.currentState!.save();
                             widget.note.dateCreatedAt =
                                 '${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}';
-                            widget.note.timeCreatedAt =
-                                '${DateTime.now().hour}:${DateTime.now().minute}';
+                            widget.note.timeCreatedAt = formatTimeTo12Hour(
+                              dateTime: DateTime.now(),
+                            );
                             await widget.note.save();
                             Navigator.pop(context);
                           }
