@@ -12,6 +12,7 @@ class ShowBottomSheetButton extends StatelessWidget {
       elevation: 0,
       onPressed: () {
         showModalBottomSheet(
+          isScrollControlled: true,
           context: context,
           builder: (context) {
             return const NoteBottomSheet();

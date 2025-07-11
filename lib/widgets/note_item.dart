@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/views/edit_note_view.dart';
 import 'package:notes_app/widgets/buttons/delete_note_button.dart';
 
 class NoteItem extends StatelessWidget {
-  const NoteItem({super.key});
+  final NoteModel note;
+  final int noteIndex;
+  const NoteItem({super.key, required this.note, required this.noteIndex});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +22,9 @@ class NoteItem extends StatelessWidget {
           children: [
             ListTile(
               contentPadding: const EdgeInsets.all(0),
-              title: const Text(
-                'Note #1',
-                style: TextStyle(
+              title: Text(
+                note.noteTitle,
+                style: const TextStyle(
                   fontSize: 28,
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
@@ -40,9 +43,9 @@ class NoteItem extends StatelessWidget {
                       ),
                     );
                   },
-                  child: const Text(
-                    'Go to the gym and watch movies in the cinema',
-                    style: TextStyle(
+                  child: Text(
+                    note.note,
+                    style: const TextStyle(
                       fontSize: 24,
                       color: Colors.black,
                       height: 1.2,
@@ -50,18 +53,22 @@ class NoteItem extends StatelessWidget {
                   ),
                 ),
               ),
-              trailing: const DeleteNoteButton(),
+              trailing: DeleteNoteButton(
+                onPressed: () async {
+                  await note.delete();
+                },
+              ),
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '8:32',
-                  style: TextStyle(fontSize: 24, color: Colors.grey),
+                  note.timeCreatedAt,
+                  style: const TextStyle(fontSize: 24, color: Colors.grey),
                 ),
                 Text(
-                  '25/05/2025',
-                  style: TextStyle(fontSize: 24, color: Colors.grey),
+                  note.dateCreatedAt,
+                  style: const TextStyle(fontSize: 24, color: Colors.grey),
                 ),
               ],
             ),

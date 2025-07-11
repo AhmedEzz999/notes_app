@@ -17,7 +17,7 @@ class NoteBottomSheet extends StatefulWidget {
 class _NoteBottomSheetState extends State<NoteBottomSheet> {
   final GlobalKey<FormState> noteKey = GlobalKey();
   AutovalidateMode noteValidate = AutovalidateMode.disabled;
-  late String title, note;
+  late String title, noteText;
 
   @override
   Widget build(BuildContext context) {
@@ -44,44 +44,55 @@ class _NoteBottomSheetState extends State<NoteBottomSheet> {
           return AbsorbPointer(
             absorbing: state is AddNoteLoading,
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 35, horizontal: 15),
-              child: Form(
-                autovalidateMode: noteValidate,
-                key: noteKey,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  spacing: 30,
-                  children: [
-                    TitleTextField(
-                      onSaved: (value) {
-                        title = value!;
-                      },
-                    ),
-                    NoteTextField(
-                      onSaved: (value) {
-                        note = value!;
-                      },
-                    ),
-                    BlocBuilder<AddNoteCubit, AddNoteState>(
-                      builder: (context, state) {
-                        return AddNoteButton(
-                          isLoading: state is AddNoteLoading,
-                          onPressed: () {
-                            if (noteKey.currentState!.validate()) {
-                              noteKey.currentState!.save();
-                              context.read<AddNoteCubit>().addNote(
-                                NoteModel(noteTitle: title, note: note, color: 5),
-                              );
-                            } else {
-                              setState(() {
-                                noteValidate = AutovalidateMode.always;
-                              });
-                            }
-                          },
-                        );
-                      },
-                    ),
-                  ],
+              padding: EdgeInsets.only(
+                left: 15,
+                right: 15,
+                top: 35,
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+              ),
+              child: SingleChildScrollView(
+                child: Form(
+                  autovalidateMode: noteValidate,
+                  key: noteKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    spacing: 30,
+                    children: [
+                      TitleTextField(
+                        onSaved: (value) {
+                          title = value!;
+                        },
+                      ),
+                      NoteTextField(
+                        onSaved: (value) {
+                          noteText = value!;
+                        },
+                      ),
+                      BlocBuilder<AddNoteCubit, AddNoteState>(
+                        builder: (context, state) {
+                          return AddNoteButton(
+                            isLoading: state is AddNoteLoading,
+                            onPressed: () {
+                              if (noteKey.currentState!.validate()) {
+                                noteKey.currentState!.save();
+                                final NoteModel note = NoteModel(
+                                  noteTitle: title,
+                                  note: noteText,
+                                  color: 5,
+                                );
+                                context.read<AddNoteCubit>().addNote(note);
+                              } else {
+                                setState(() {
+                                  noteValidate = AutovalidateMode.always;
+                                });
+                              }
+                            },
+                          );
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                    ],
+                  ),
                 ),
               ),
             ),

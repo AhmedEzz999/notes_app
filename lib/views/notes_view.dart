@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/widgets/buttons/show_bottom_sheet_button.dart';
 import 'package:notes_app/widgets/custom_app_bar.dart';
 import 'package:notes_app/widgets/note_item.dart';
 
 class NotesView extends StatelessWidget {
-  const NotesView({super.key});
+  final List<NoteModel> notes;
+  const NotesView({super.key, required this.notes});
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +19,9 @@ class NotesView extends StatelessWidget {
               const CustomAppBar(),
               Expanded(
                 child: ListView.builder(
-                  itemCount: 6,
-                  itemBuilder: (context, index) => const NoteItem(),
+                  itemCount: notes.length,
+                  itemBuilder: (context, index) =>
+                      NoteItem(note: notes[index], noteIndex: index),
                 ),
               ),
             ],
